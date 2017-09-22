@@ -50,6 +50,8 @@ export class Table extends React.Component {
 			renderRows.push(<TableRow key={index} date={dataPoint.real_estate_date} rental_rate={dataPoint.rental_rate} />);
 		})
 
+		const finalRows = renderRows.reverse()
+
 		return (
 	
 	<section className="forecast-data">
@@ -107,7 +109,7 @@ export class Table extends React.Component {
 
 	    <div className="forecast-table__body">
 	    	
-	    	{renderRows}
+	    	{finalRows}
 
 	    </div>
 
