@@ -37,16 +37,30 @@ class App extends Component {
 
 
   render() {
+    const chartSize = this.state.chartData.length;
+    const forecastSize = this.state.forecastData.length;
+
+    const forecastValues = [];
     const chartDates = [];
-    for (var i = 0; i < this.state.chartData.length; i++) {
+    for (var i = 0; i < chartSize; i++) {
       chartDates.push(this.state.chartData[i].real_estate_date)
+      forecastValues.push(' ')
     }
 
     const chartValues = [];
-    for (var x = 0; x < this.state.chartData.length; x++) {
+    for (var x = 0; x < chartSize; x++) {
       chartValues.push(this.state.chartData[x].rental_rate)
     }
 
+    for (var j = 0; j < forecastSize; j++) {
+      chartDates.push(this.state.forecastData[j].real_estate_date)
+    }
+
+    for (var y = 0; y < forecastSize; y++) {
+      forecastValues.push(this.state.forecastData[y].rental_rate)
+    }
+
+    console.log(forecastValues)
 
     return (
       <div>
@@ -55,8 +69,8 @@ class App extends Component {
 
         <main className="main" role="main">
           <ForecastHeader />
-          <Chart chartDates={chartDates} chartValues={chartValues}/>
-          <Table data={this.state.chartData} forecastData={this.state.forecastData}/>
+          <Chart chartDates={chartDates} chartValues={chartValues} forecastValues={forecastValues}/>
+          <Table data={this.state.chartData} forecastData={this.state.forecastData} forecastValues={forecastValues}/>
         </main>
 
           <script src="https://code.jquery.com/jquery-1.12.3.min.js"></script>

@@ -20,18 +20,6 @@ export class ActualRow extends React.Component{
 
 	        <div className="forecast-table__col forecast-table__col-set table__col-set">
 
-	          <div className="col-set">
-	            <div className="col-set__item">
-	              <span className="table-text">17%</span>
-	            </div>
-	            <div className="col-set__item">
-	              <span className="table-text">55%</span>
-	            </div>
-	            <div className="col-set__item">
-	              <span className="table-text">91%</span>
-	            </div>
-	          </div>
-
 	        </div>
 
 	      </div>
@@ -166,7 +154,6 @@ export class Table extends React.Component {
 	    <div className="forecast-table__body">
 	    	{finalForecastRows}
 	    	{finalActualRows}
-
 	    </div>
 
 	  </div>
