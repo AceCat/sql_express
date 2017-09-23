@@ -1,7 +1,7 @@
 var React = require('react');
 
 
-export class TableRow extends React.Component{ 
+export class ActualRow extends React.Component{ 
 
   render() {
   	let date = this.props.date;
@@ -39,18 +39,74 @@ export class TableRow extends React.Component{
   }
 }
 
+export class ForecastRow extends React.Component{ 
+
+  render() {
+  	const convertToPercent = function(decimal){
+  		const convertedValue = (decimal * 100) + '%';
+  		return convertedValue
+  	}
+
+  	let date = this.props.date;
+  	let rental_rate = this.props.rental_rate;
+  	let confidence_6 = convertToPercent(this.props.confidence_6)
+  	let confidence_12 = convertToPercent(this.props.confidence_12)
+  	let confidence_18 = convertToPercent(this.props.confidence_18);
+
+    return (
+      <div className="forecast-table__row forecast-table__row-prediction table__row">
+
+        <div className="forecast-table__col table__col">
+          <span className="table-text table-text__year">{date}</span>
+          <span className="table-text table-text__month"></span>
+        </div>
+
+        <div className="forecast-table__col table__col">
+          <span className="table-text">{rental_rate}</span>
+        </div>
+
+        <div className="forecast-table__col forecast-table__col-set table__col-set">
+
+          <div className="col-set">
+            <div className="col-set__item">
+              <span className="table-text">{confidence_6}</span>
+            </div>
+            <div className="col-set__item">
+              <span className="table-text">{confidence_12}</span>
+            </div>
+            <div className="col-set__item">
+              <span className="table-text">{confidence_18}</span>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    );
+  }
+}
+
 
 export class Table extends React.Component {
 
 	render() {
 		const dataRows = this.props.data;
 		const renderRows = []
+		const forecastData = this.props.forecastData
+		const forecastRows = []
 
 		dataRows.forEach(function(dataPoint, index) {
-			renderRows.push(<TableRow key={index} date={dataPoint.real_estate_date} rental_rate={dataPoint.rental_rate} />);
+			renderRows.push(<ActualRow key={index} date={dataPoint.real_estate_date} rental_rate={dataPoint.rental_rate} />);
 		})
 
-		const finalRows = renderRows.reverse()
+		forecastData.forEach(function(dataPoint, index) {
+			forecastRows.push(<ForecastRow key={index} date={dataPoint.real_estate_date} rental_rate={dataPoint.rental_rate} confidence_6={dataPoint.confidence_6} confidence_12={dataPoint.confidence_12} confidence_18={dataPoint.confidence_18}/>);
+		})
+
+
+
+		const finalActualRows = renderRows.reverse()
+		const finalForecastRows = forecastRows.reverse()
 
 		return (
 	
@@ -108,8 +164,8 @@ export class Table extends React.Component {
 	    </div>
 
 	    <div className="forecast-table__body">
-	    	
-	    	{finalRows}
+	    	{finalForecastRows}
+	    	{finalActualRows}
 
 	    </div>
 

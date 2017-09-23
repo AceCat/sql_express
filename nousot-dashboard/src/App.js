@@ -15,7 +15,8 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      chartData: []
+      chartData: [],
+      forecastData: []
     }
   }
 
@@ -24,6 +25,12 @@ class App extends Component {
       .then((response) => {
         this.setState({
           chartData: response
+      });
+    });
+    api.makeAPICall('forecastView')
+      .then((response) => {
+        this.setState({
+          forecastData: response
       });
     });
   } 
@@ -49,7 +56,7 @@ class App extends Component {
         <main className="main" role="main">
           <ForecastHeader />
           <Chart chartDates={chartDates} chartValues={chartValues}/>
-          <Table data={this.state.chartData} />
+          <Table data={this.state.chartData} forecastData={this.state.forecastData}/>
         </main>
 
           <script src="https://code.jquery.com/jquery-1.12.3.min.js"></script>

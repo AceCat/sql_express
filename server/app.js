@@ -12,8 +12,11 @@ var db = require ('./queries.js');
 
 app.use(cors());
 
+
 app.use('/csvUpload', db.importCSV);
 app.use('/csvView', db.CSVtoJSON);
+app.use('/forecastUpload', db.importForecastCSV);
+app.use('/forecastView', db.forecastCSVtoJSON);
 
 server.listen(port, function () {
 
