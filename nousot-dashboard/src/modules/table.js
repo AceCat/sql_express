@@ -15,7 +15,7 @@ export class ActualRow extends React.Component{
 	        </div>
 
 	        <div className="forecast-table__col table__col">
-	          <span className="table-text">{rental_rate}</span>
+	          <span className="table-text">{parseFloat(Math.round(rental_rate * 100)/100).toFixed(2)}</span>
 	        </div>
 
 	        <div className="forecast-table__col forecast-table__col-set table__col-set">
@@ -50,8 +50,10 @@ export class ForecastRow extends React.Component{
         </div>
 
         <div className="forecast-table__col table__col">
-          <span className="table-text">{rental_rate}</span>
+          <span className="table-text">{parseFloat(Math.round(rental_rate * 100)/100).toFixed(2)}</span>
         </div>
+
+
 
         <div className="forecast-table__col forecast-table__col-set table__col-set">
 

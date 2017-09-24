@@ -40,27 +40,31 @@ class App extends Component {
     const chartSize = this.state.chartData.length;
     const forecastSize = this.state.forecastData.length;
 
+//This group of code creates the complete set of dates for the actual and forecast data
+//It also stuffs the forecast values with dummy data so it begins rendering AFTER the 
+//actual data
     const forecastValues = [];
     const chartDates = [];
     for (var i = 0; i < chartSize; i++) {
       chartDates.push(this.state.chartData[i].real_estate_date)
-      forecastValues.push(' ')
-    }
-
-    const chartValues = [];
-    for (var x = 0; x < chartSize; x++) {
-      chartValues.push(this.state.chartData[x].rental_rate)
+      forecastValues.push(null)
     }
 
     for (var j = 0; j < forecastSize; j++) {
       chartDates.push(this.state.forecastData[j].real_estate_date)
     }
 
+    //This is the dataset that serves as the 'actual dataset'
+    const chartValues = [];
+    for (var x = 0; x < chartSize; x++) {
+      chartValues.push(this.state.chartData[x].rental_rate)
+    }
+
+    //This is the dataset that serves as the 'forecast dataset'
     for (var y = 0; y < forecastSize; y++) {
       forecastValues.push(this.state.forecastData[y].rental_rate)
     }
 
-    console.log(forecastValues)
 
     return (
       <div>

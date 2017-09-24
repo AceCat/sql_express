@@ -18,20 +18,35 @@ export class Chart extends React.Component{
 			{
 				label: "Actual",
 				data: this.props.chartValues,
-				pointRadius: 0,
+				pointRadius: 1
 			}, 
 			{
 				label: "Forecast",
 				data: this.props.forecastValues,
-				pointRadius: 0,
-				backgroundColor: '#e3e550'
+				backgroundColor: '#e3e550',
+				spanGaps: true,
+				pointRadius: 1
 			}]
 		}
+			
 
 		return(
 			<div className='chart'>
 				<Line
 				data={chartData}
+   options={{
+       legend: {
+         display: false
+       },
+       showXLabels: 10,
+       scales: {
+         xAxes: [{
+           ticks: {
+           	autoskip: true
+            }
+           }]
+         }
+     }}
 				/>
 			</div>)
 	}
