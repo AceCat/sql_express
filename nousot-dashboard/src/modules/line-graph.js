@@ -1,11 +1,7 @@
-import { Bar, Line } from 'react-chartjs-2'; 
+import { Line } from 'react-chartjs-2'; 
 var React = require('react');
 
 export class Chart extends React.Component{ 
-
-	constructor(props) {
-		super(props);
-	}
 
 
 	render(){
@@ -23,7 +19,7 @@ export class Chart extends React.Component{
 			{
 				label: "Forecast",
 				data: this.props.forecastValues,
-				backgroundColor: '#e3e550',
+				backgroundColor: 'rgba(255,255,0,.1)',
 				spanGaps: true,
 				pointRadius: 1
 			}]
@@ -34,19 +30,6 @@ export class Chart extends React.Component{
 			<div className='chart'>
 				<Line
 				data={chartData}
-   options={{
-       legend: {
-         display: false
-       },
-       showXLabels: 10,
-       scales: {
-         xAxes: [{
-           ticks: {
-           	autoskip: true
-            }
-           }]
-         }
-     }}
 				/>
 			<br />
 			</div>

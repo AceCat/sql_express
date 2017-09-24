@@ -3,11 +3,6 @@ var React = require('react');
 
 export class ForecastHeader extends React.Component{ 
 
-  constructor(props) {
-    super(props);
-  }
-
-
   render() {
     return (
       <header className="view-header">

@@ -1663,7 +1663,7 @@ input.data-percent {
 }
 
 .pagination.active {
-    background-color: #4786ed;
+    background-color: black;
     color: white;
 }
 
