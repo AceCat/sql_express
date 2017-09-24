@@ -6,6 +6,7 @@ import { ForecastData} from './modules/forecast-data.js';
 import { ForecastHeader} from './modules/forecast-header.js';
 import { Chart } from './modules/line-graph.js';
 import { Table } from './modules/table.js';
+import {Pagination} from './modules/paginate.js';
 const api = require('./modules/api.js');
 
 
@@ -16,8 +17,15 @@ class App extends Component {
     super(props);
     this.state = {
       chartData: [],
-      forecastData: []
+      forecastData: [],
+      currentPage: 1,
+      itemsPerPage: 12
     }
+    this.changePage = this.changePage.bind(this);
+  }
+
+  changePage(pageNum) {
+    this.setState({currentPage: pageNum});
   }
 
   componentDidMount() {
@@ -39,6 +47,9 @@ class App extends Component {
   render() {
     const chartSize = this.state.chartData.length;
     const forecastSize = this.state.forecastData.length;
+
+    const currentPage = this.state.currentPage
+    const itemsPerPage = this.state.itemsPerPage
 
 //This group of code creates the complete set of dates for the actual and forecast data
 //It also stuffs the forecast values with dummy data so it begins rendering AFTER the 
@@ -74,8 +85,15 @@ class App extends Component {
         <main className="main" role="main">
           <ForecastHeader />
           <Chart chartDates={chartDates} chartValues={chartValues} forecastValues={forecastValues}/>
-          <Table data={this.state.chartData} forecastData={this.state.forecastData} forecastValues={forecastValues}/>
+          <Table currentPage={currentPage} itemsPerPage={itemsPerPage} data={this.state.chartData} forecastData={this.state.forecastData} forecastValues={forecastValues}/>
+          <Pagination
+          data={chartDates}
+          currentPage={currentPage}
+          itemsPerPage={itemsPerPage}
+          onPageChange={this.changePage}
+          />
         </main>
+
 
           <script src="https://code.jquery.com/jquery-1.12.3.min.js"></script>
           <script src="/dist/js/jquery-ui.min.js"></script>

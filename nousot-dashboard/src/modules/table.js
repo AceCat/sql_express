@@ -80,23 +80,33 @@ export class ForecastRow extends React.Component{
 export class Table extends React.Component {
 
 	render() {
+		const currentPage = this.props.currentPage
+
 		const dataRows = this.props.data;
 		const renderRows = []
 		const forecastData = this.props.forecastData
-		const forecastRows = []
+		const availableRows = []
 
 		dataRows.forEach(function(dataPoint, index) {
-			renderRows.push(<ActualRow key={index} date={dataPoint.real_estate_date} rental_rate={dataPoint.rental_rate} />);
+			availableRows.push(<ActualRow key={index} date={dataPoint.real_estate_date} rental_rate={dataPoint.rental_rate} />);
 		})
 
 		forecastData.forEach(function(dataPoint, index) {
-			forecastRows.push(<ForecastRow key={index} date={dataPoint.real_estate_date} rental_rate={dataPoint.rental_rate} confidence_6={dataPoint.confidence_6} confidence_12={dataPoint.confidence_12} confidence_18={dataPoint.confidence_18}/>);
+			availableRows.push(<ForecastRow key={index} date={dataPoint.real_estate_date} rental_rate={dataPoint.rental_rate} confidence_6={dataPoint.confidence_6} confidence_12={dataPoint.confidence_12} confidence_18={dataPoint.confidence_18}/>);
+		})
+
+		const orderedAvailableRows = availableRows.reverse()
+
+		orderedAvailableRows.forEach(function(row, index) {
+			if (index + 1 <= (currentPage * 12) && index >= currentPage * 12 - 12) {
+				renderRows.push(availableRows[index]);
+			}
 		})
 
 
 
-		const finalActualRows = renderRows.reverse()
-		const finalForecastRows = forecastRows.reverse()
+		// const finalActualRows = renderRows.reverse()
+		// const finalForecastRows = forecastRows.reverse()
 
 		return (
 	
@@ -154,8 +164,8 @@ export class Table extends React.Component {
 	    </div>
 
 	    <div className="forecast-table__body">
-	    	{finalForecastRows}
-	    	{finalActualRows}
+	    	{renderRows}
+
 	    </div>
 
 	  </div>
