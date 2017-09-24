@@ -1,15 +1,12 @@
 import React, { Component } from 'react';
 import './App.css';
-import { Header } from './modules/header.js';
-import { Aside } from './modules/aside.js';
-import { ForecastHeader} from './modules/forecast-header.js';
-import { Chart } from './modules/line-graph.js';
-import { Table } from './modules/table.js';
-import {Pagination} from './modules/paginate.js';
-const api = require('./modules/api.js');
-
-
-
+import { Header } from './components/header.js';
+import { Aside } from './components/aside.js';
+import { ForecastHeader} from './components/forecast-header.js';
+import { Chart } from './components/line-graph.js';
+import { Table } from './components/table.js';
+import {Pagination} from './components/paginate.js';
+const api = require('./components/api.js');
 
 class App extends Component {
   constructor(props) {
@@ -42,7 +39,6 @@ class App extends Component {
     });
   } 
 
-
   render() {
     const chartSize = this.state.chartData.length;
     const forecastSize = this.state.forecastData.length;
@@ -67,7 +63,6 @@ class App extends Component {
     for (var y = 0; y < forecastSize; y++) {
       forecastValues.push(this.state.forecastData[y].rental_rate)
     }
-
 
     return (
       <div>
