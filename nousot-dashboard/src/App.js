@@ -3,7 +3,7 @@ import './App.css';
 import { Header } from './components/header.js';
 import { Aside } from './components/aside.js';
 import { ForecastHeader} from './components/forecast-header.js';
-import { Chart } from './components/line-graph.js';
+import { Chart } from './components/chart.js';
 import { Table } from './components/table.js';
 import {Pagination} from './components/paginate.js';
 const api = require('./components/api.js');
